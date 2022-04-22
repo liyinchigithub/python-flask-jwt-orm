@@ -13,16 +13,16 @@
 
 # 目录说明
 
-|--app          # 应用目录
-|---api         # flask api
-|---common      # 公共模块
-|---db          # 数据库模块
-|---static      # 静态文件
-|---templates   # 模板文件
-|---tests       # 测试文件
-|---upload      # 上传文件存放位置
-|---config.py   # 配置文件
-|---run.py      # 启动文件
+* |--app          # 应用目录
+* |---api         # flask api
+* |---common      # 公共模块
+* |---db          # 数据库模块
+* |---static      # 静态文件
+* |---templates   # 模板文件
+* |---tests       # 测试文件
+* |---upload      # 上传文件存放位置
+* |---config.py   # 配置文件
+* |---run.py      # 启动文件
 
 
 ## 启动服务
@@ -39,6 +39,7 @@ if __name__ == "__main__":
     print(app.url_map)# 打印路由
     app.run(debug=True, host="127.0.0.1", port=5876, use_reloader=True)
 ```
+<img width="678" alt="image" src="https://user-images.githubusercontent.com/19643260/164743311-90f127f0-3369-408b-9cce-097e9502bbd5.png">
 
 
 ## 允许跨域配置
