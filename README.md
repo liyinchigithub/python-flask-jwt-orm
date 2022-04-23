@@ -218,6 +218,28 @@ token = jwt.encode(_payload, secret, algorithm='HS256')
 payload = jwt.decode(token, secret, algorithms=['HS256'])
 ```
 
+## Flask ORM SQLAlchemy
+
+### 增加一行记录
+```python
+
+```
+
+### 修改一行记录
+```python
+
+```
+
+### 查询一行记录
+```python
+
+```
+
+### 删除一行记录
+```python
+
+```
+
 
 # 常见问题
 
