@@ -211,11 +211,11 @@ pytest
 
 ### 生成token
 ```python
-
+token = jwt.encode(_payload, secret, algorithm='HS256')
 ```
 ### 校验token
 ```python
-
+payload = jwt.decode(token, secret, algorithms=['HS256'])
 ```
 
 
