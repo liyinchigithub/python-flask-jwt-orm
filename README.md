@@ -27,7 +27,7 @@
 
 ## 启动服务
 ```shell
-cd /python-flask/app
+cd /app
 python run.py
 ```
 
@@ -201,7 +201,7 @@ URL 处理程序从 ​request.files[]​ 对象中提取文件，并将其保�
 
 * 单元测试 上传文件
 ```shell
-cd Flask/app/tests/test_.py
+cd /app/tests/test_.py
 pytest
 ```
 
