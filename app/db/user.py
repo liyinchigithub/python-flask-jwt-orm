@@ -108,6 +108,8 @@ result2=session.query(User).filter(User.username.like('%liyinchi%')).all()
 for r in result2:
     print("r.username",r.username)
     print("r.id:",r.id)
+result = session.query(func.count(User.id),func.count(User.username)).group_by(User.id).all()
+print("func.count(User.id):",result)#  [(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)]
 print("模糊查询======================")
 session.commit()
 
@@ -190,12 +192,12 @@ print("result",result)# [(1, 1, 1), (1, 1, 1)]
 print("分组======================")
 
 # [连表]
-result = session.query(User).join(UserType, isouter=True)
-print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
-print("连表======================")
-result = session.query(User).outerjoin(UserType)
-print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
-print("连表======================")
+# result = session.query(User).join(UserType, isouter=True)
+# print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+# print("连表======================")
+# result = session.query(User).outerjoin(UserType)
+# print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+# print("连表======================")
 
 
 #  union(去重),union_all(不去重)
