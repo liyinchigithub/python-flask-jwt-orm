@@ -192,10 +192,10 @@ print("result",result)# [(1, 1, 1), (1, 1, 1)]
 print("分组======================")
 
 # [连表]
-# result = session.query(User).join(UserType, isouter=True)
+# result = session.query(User).join(UserType, isouter=True) # 内连接取外表的交集   isouter=True表示可以不存在关联的数据
 # print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
 # print("连表======================")
-# result = session.query(User).outerjoin(UserType)
+# result = session.query(User).outerjoin(UserType)# 外连接取外表的并集
 # print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
 # print("连表======================")
 
@@ -209,7 +209,7 @@ https://www.runoob.com/mysql/mysql-join.html
 #  union(去重),union_all(不去重) 2个表需要有共同的字段
 s1 = session.query(User.id, User.username)
 s2 = session.query(UserType.id, UserType.title)
-result = s1.union_all(s1)
+result = s1.union_all(s2)
 print("result",result)# 返回的是一个结果集
 print("union======================")
 
