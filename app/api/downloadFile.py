@@ -31,7 +31,7 @@ def file_send(file_path):  # 发送大文件可以该方法
 '''
     [文件下载接口]
 '''
-@downloadFile.route('/DownLoadApk', methods=['GET'])
+@downloadFile.route('/downLoadApk', methods=['GET'])
 def downLoadApk():
     return send_file('./download/4.1.1a Alpha2-armeabi-v7a-release.apk', as_attachment=True, attachment_filename='4.1.1a Alpha2-armeabi-v7a-release.apk')  # 或使用下行代码
     # return send_from_directory('./', 'test.xlsx', as_attachment=True)
@@ -69,7 +69,7 @@ def download4():
     [版本更新接口]
     http://127.0.0.1:5876/downloadFile/CheckAppVersion
 '''
-@downloadFile.route('/CheckAppVersion', methods=['POST'])
+@downloadFile.route('/CheckAppVersion', methods=['POST','GET'])
 def check_app_version():
     try:
         request_data = request.json
