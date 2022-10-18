@@ -20,6 +20,7 @@ from api.login import * # 定义路由-登录 [蓝图]模块化
 from api.upload import * # 定义路由-上传文件
 from api.logout import * # 定义路由-退出登录
 from api.register import * # 定义路由-注册
+from api.downloadFile import * # 定义路由-注册
 
 from common.token import *
 # 实例化Flask对象 app
@@ -36,6 +37,7 @@ app.register_blueprint(login,url_prefix='/login')
 app.register_blueprint(upload,url_prefix='/upload')
 app.register_blueprint(logout,url_prefix='/logout')
 app.register_blueprint(register,url_prefix='/register')
+app.register_blueprint(downloadFile,url_prefix='/downloadFile')
 
 
 # [文件上传]存放位置
