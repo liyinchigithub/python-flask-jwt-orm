@@ -73,8 +73,8 @@ def download4():
 def check_app_version():
     try:
         request_data = request.json
-        print("request.json",request.json)
-        # # TODO 查询数据库是否有新版
+        print("request.json",request_data)
+        # # TODO 查询数据库是否有新版（请求版本和数据库当前最新版本比较）
         # print(type(user.select_user_page(request_data["page_num"],request_data["page_size"])))
         # # TODO 如果有新版，则返回一个数据类型为字典的json数据，如果没有新版，则返回None
         # result=user.select_user_page(request_data["page_num"],request_data["page_size"])
