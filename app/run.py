@@ -13,6 +13,8 @@ from flasgger.utils import swag_from # flask swagger
 from flask_cors import *  # 跨域访问
 from werkzeug.utils import secure_filename
 from werkzeug.routing import BaseConverter # 正则表达式
+from flask_restplus import Api, Resource, fields, reqparse
+
 import os
 import uuid  # 生成随机字符串
 import json
