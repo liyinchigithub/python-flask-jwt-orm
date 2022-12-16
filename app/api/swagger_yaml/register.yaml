@@ -1,0 +1,30 @@
+In this example the specification is taken from external YAML file
+---
+tags:
+  -  register
+parameters:
+  - name: 账号注册接口
+    in: body
+    schema:
+      id: register（账号注册接口）
+      required:
+        - username
+        - password
+        - type
+      properties:
+        username:
+          type: string
+          description: 账号
+        password:
+          type: string
+          description: 密码
+        type:
+          type: string
+          description: 类型
+responses:
+   200:
+      description: 注册成功
+      example: {"msg": "success", "code": 200, "data":  "注册成功"}
+   400:
+      description: 注册失败
+      example:  {"msg": "error", "code": 500, "data": "注册失败，失败原因:xxx"}

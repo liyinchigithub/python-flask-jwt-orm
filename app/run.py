@@ -108,14 +108,14 @@ def user_regex(name):
 
 
 # [获取url ? 后面的&参数]    request.args.to_dict()
-@app.route('/find', methods=['GET', 'POST'])
-@swag_from('swagger_yaml/index.yaml')
-def find():
-    get_data = request.args.to_dict()# 获取传入的params参数
-    username = get_data.get('username')
-    password = get_data.get('password')
-    # 返回
-    return {"msg": "success", "code": 200, "data": {"username":username,"password":password}}
+# @app.route('/find', methods=['GET', 'POST'])
+# @swag_from('swagger_yaml/index.yaml')
+# def find():
+#     get_data = request.args.to_dict()# 获取传入的params参数
+#     username = get_data.get('username')
+#     password = get_data.get('password')
+#     # 返回
+#     return {"msg": "success", "code": 200, "data": {"username":username,"password":password}}
 
 # 每个请求前执行
 @app.before_request
