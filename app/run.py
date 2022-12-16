@@ -27,7 +27,7 @@ from api.downloadFile import * # 定义路由-注册
 from common.token import *
 # 实例化Flask对象 app
 app = Flask(__name__, template_folder='./myProject/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
-# 
+#  [swagger]
 swagger = Swagger(app)
 
 # [允许跨域]
@@ -107,13 +107,14 @@ def user_regex(name):
     return {"msg": "success", "status": 200, "data": name}
 
 
-# [获取url ? 后面的参数]    request.args.to_dict()
+# [获取url ? 后面的&参数]    request.args.to_dict()
 @app.route('/find', methods=['GET', 'POST'])
-@swag_from('./swagger_yaml/index.yaml')
+@swag_from('swagger_yaml/index.yaml')
 def find():
     get_data = request.args.to_dict()# 获取传入的params参数
     username = get_data.get('username')
     password = get_data.get('password')
+    # 返回
     return {"msg": "success", "code": 200, "data": {"username":username,"password":password}}
 
 # 每个请求前执行

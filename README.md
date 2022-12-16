@@ -274,6 +274,14 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 ```
 
 
+# 接口文档（swagger）
+
+本项目使用flasgger
+
+>http://127.0.0.1:5876/apidocs/#/
+
+[Flask 引入swagger](https://blog.csdn.net/u013302168/article/details/128337182)
+
 # 常见问题
 
 * 1.
@@ -291,7 +299,10 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 
 解决办法：
 
+* 4.
+原因：
 
+解决办法：
 
 # 参考
 
@@ -303,4 +314,6 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 
 [python orm SQLAlchemy](https://docs.sqlalchemy.org/en/14/orm/quickstart.html)
 
+[flask swagger flask-restplus](https://flask-restplus.readthedocs.io/en/stable/swagger.html)
 
+[flask swagger](https://www.cnblogs.com/lifei01/p/13797889.html)

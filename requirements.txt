@@ -38,3 +38,4 @@ xlrd==2.0.1
 jira==3.2.0
 bunch==1.0.1
 pillow==9.1.0
+flask-restplus==0.13.0

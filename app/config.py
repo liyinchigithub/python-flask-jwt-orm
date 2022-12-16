@@ -21,6 +21,11 @@ JWT_AUTH_HEADER_PREFIX = 'JWT'
 # jwt 不是在之前
 JWT_NOT_BEFORE_DELTA = timedelta(seconds=0)
 
+# swagger
+SWAGGER_TITLE='测试swagger'
+SWAGGER_DESC=''
+SWAGGER_HOST='127.0.0.1'
+
 # 数据库配置
 DB_USERNAME = 'root'
 DB_PASSWORD = 'lyc123456'

@@ -1,0 +1,28 @@
+In this example the specification is taken from external YAML file
+---
+tags:
+  -  score
+parameters:
+  - name: 接口主体
+    in: body
+    schema:
+      id: score（接口的名称）
+      required:
+        - id
+        - name
+        - course
+      properties:
+        id:
+          type: string
+          description: 学号
+        name:
+          type: string
+          description: 姓名
+        course:
+          type: string
+          description: 课程
+responses:
+   200:
+      description: 响应结果正确
+   400:
+      description: 响应结果错误
