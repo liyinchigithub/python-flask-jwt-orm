@@ -13,7 +13,8 @@ import os
 import uuid  # 生成随机字符串
 import json
 from flask import current_app as app # 让蓝图可以使用app对象
-
+from flasgger import Swagger # flask swagger
+from flasgger.utils import swag_from # flask swagger
 # 创建蓝图对象
 logout=Blueprint('logout',__name__)
 

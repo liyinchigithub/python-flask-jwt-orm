@@ -1,0 +1,27 @@
+In this example the specification is taken from external YAML file
+---
+tags:
+  -  register_list
+parameters:
+  - name: 账号注册列表
+    in: body
+    schema:
+      id: register_list（账号注册列表）
+      required:
+        - page_num
+        - page_size
+      properties:
+        page_num:
+          type: number
+          description: 页码
+        page_size:
+          type: number
+          description: 页数
+
+responses:
+   200:
+      description: 成功
+      example: {"msg": "success", "code": 200, "data":  "成功"}
+   400:
+      description: 失败
+      example:  {"msg": "fali", "code": 401, "data": e}

@@ -12,7 +12,8 @@ import os,sys
 import uuid  # 生成随机字符串
 import json
 from flask import current_app as app # 让蓝图可以使用app对象
-
+from flasgger import Swagger # flask swagger
+from flasgger.utils import swag_from # flask swagger
 sys.path.append('../')
 from app.db import user # 导入用户模型
 

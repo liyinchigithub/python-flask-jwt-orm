@@ -3,7 +3,10 @@ from flask import current_app
 
 
 class jwt_token():
-
+    # 构造函数（类实例化对象时传入参数） 类(形参)
+    def __init__(self):
+        pass
+   
     def generate_jwt(self, payload, expiry, secret=None):
         """
         生成jwt
@@ -17,9 +20,9 @@ class jwt_token():
 
         if not secret:
             secret = current_app.config['JWT_SECRET']
-
+        # bytes.decode('utf-8', 'ignore')
         token = jwt.encode(_payload, secret, algorithm='HS256')
-        return token.decode()
+        return token
 
     def verify_jwt(self, token, secret=None):
         """

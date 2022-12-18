@@ -18,8 +18,6 @@ sys.path.append('../')
 Base = declarative_base()
 
 # 创建表对象:
-
-
 class User(Base):
     # 表的名字:
     __tablename__ = 'user'
@@ -62,6 +60,7 @@ class User(Base):
         
 
 '''
+    [SQL语句]
     CREATE TABLE IF NOT EXISTS `user`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `username` VARCHAR(100) NOT NULL COMMENT '账号',
@@ -84,6 +83,7 @@ class UserType(Base):
 
 
 '''
+    [SQL语句]
     CREATE TABLE IF NOT EXISTS `usertype`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `title` VARCHAR(100) NOT NULL COMMENT '标题',
@@ -101,7 +101,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 '''
-    # [用户表插入数据-创建用户]
+    ORM [用户表插入数据-创建用户]
     param: username string
     param: password string
     param: type string
@@ -142,11 +142,9 @@ def insert_user(username, password, type):
 # session.add_all(value_list)
 
 '''
-    # [多值匹配（包含）]
+    ORM [多值匹配（包含）]
     param: condition 列表 例如：['liyinchi1','liyinchi2']
 '''
-
-
 def select_user_accurate(username):
     # [精确查询]
     result = session.query(User).filter(User.username == username).all()
@@ -159,11 +157,9 @@ def select_user_accurate(username):
 
 
 '''
-    # [查询用户表数据,仅返回匹配多条中的第一条]
+    ORM [查询用户表数据,仅返回匹配多条中的第一条]
     param: condition 列表 例如：['liyinchi1','liyinchi2']
 '''
-
-
 def select_user_first_one(username):
     # 获取多条，只返回第一条
     res = session.query(User).filter(User.username == username).first()
@@ -175,10 +171,9 @@ def select_user_first_one(username):
         if hasattr(res, '__table__'):
             return {column.name:getattr(res,column.name) for column in res.__table__.columns}
 '''
-    # [用户表数据-模糊查询]
+   ORM [用户表数据-模糊查询]
     param: username string
 '''
-
 
 def select_user_fuzzy(username):
     # [模糊查询]
@@ -196,16 +191,15 @@ def select_user_fuzzy(username):
 
 
 '''
-    # [查询表所有数据]
+    ORM [查询表所有数据]
 '''
-
 
 def select_user_all():
     result = session.query(User).all()
     return result
 
 '''
-    # [分页查询]
+    ORM [分页查询]
     @param: page_num int  每页显示的记录数量
     @param: page_size int 当前页码
 '''
@@ -219,7 +213,7 @@ def select_user_page(page_size=1,page_num=10):
 
 
 '''
-    # [多值匹配（包含）]
+    ORM [多值匹配（包含）]
     param: condition 列表 例如：['liyinchi1','liyinchi2']
 '''
 
@@ -234,7 +228,7 @@ def select_user_condition(condition):
 
 
 '''
-    # [多值匹配（不包含）]
+    ORM [多值匹配（不包含）]
     param: condition 列表 例如：['liyinchi1','liyinchi2']
 '''
 
@@ -315,7 +309,7 @@ result = session.query(func.count(User.id), func.max(
 print("result", result)  # [(1, 1, 1), (1, 1, 1)]
 print("分组======================")
 
-# [连表]
+# ORM [连表]
 # result = session.query(User).join(UserType, isouter=True) # 内连接取外表的交集   isouter=True表示可以不存在关联的数据
 # print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
 # print("连表======================")
@@ -377,19 +371,19 @@ print("修改多条数据======================")
 session.commit()
 
 
-# [删除一条数据]
+# ORM [删除一条数据]
 # result11 =session.query(User).filter(User.id == 1).delete()# 根据id字段，删除指定数据
 # print("result11:",result11)# 1表示删除成功，0表示删除失败
 # print("删除一条数据======================")
 # session.commit()
 
-# [删除多条数据]
+# ORM [删除多条数据]
 # result12 =session.query(User).filter(User.username.like('liyinchi%')).delete(False)
 # print("result12:",result12)# 返回删除的条数
 # print("删除多条数据======================")
 # session.commit()
 
-# [全删]
+# ORM [全删]
 # result13 =session.query(User).delete()
 # session.commit()
 

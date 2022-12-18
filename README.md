@@ -64,7 +64,7 @@ python run.py
 
 ## 接口列表
 
-run.py中加入app.url_map 可查看当前项目所有可用接口
+<!-- run.py中加入app.url_map 可查看当前项目所有可用接口 -->
 ```shell
 if __name__ == "__main__":
     print(app.url_map)# 打印路由

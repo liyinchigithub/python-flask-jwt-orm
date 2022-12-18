@@ -136,18 +136,18 @@ def before_request():
         auth = request.headers.get('Authorization')
         # 判断是否以 Bearer开头
         if auth and auth.startswith('Bearer '):
-            "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
+            # "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
             token = auth[7:]
             print("token:",token)
-            "校验token"
+            # "校验token"
             payload = verify_jwt(token)
             print("payload:",payload)
             if payload!=None:
-                "判断token的校验结果"
+                # "判断token的校验结果"
                 g.user_id = None
                 g.refresh = None
                 if payload:
-                    "获取载荷中的信息赋值给g对象"
+                    # "获取载荷中的信息赋值给g对象"
                     g.user_id = payload.get('user_id')
                     g.refresh = payload.get('refresh')
             else:

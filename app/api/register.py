@@ -60,6 +60,7 @@ def register_api():
 
 
 @register.route('/list', methods=['POST'])
+@swag_from('swagger_yaml/register_list.yaml')
 def register_list_api():
     try:
         request_data = request.json
@@ -69,7 +70,7 @@ def register_list_api():
         # 如果用户名已存在，则返回一个数据类型为字典的json数据，如果不存在，则返回None
         result=user.select_user_page(request_data["page_num"],request_data["page_size"])
         print("register list ：",result)
-        return dict(code=200, msg="success", data=result)
+        return dict(code=200, msg="success", data=result,page_num=request_data["page_num"],page_size=request_data["page_size"],total=len(result),)
     except Exception as e:
         print(e)
         return {"msg": "fali", "code": 401, "data": e}
