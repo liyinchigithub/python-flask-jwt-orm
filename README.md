@@ -280,6 +280,8 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 
 >http://127.0.0.1:5876/apidocs/#/
 
+<img width="1439" alt="image" src="https://user-images.githubusercontent.com/19643260/208307968-03625cea-976d-47c7-a100-b5d7403d14ac.png">
+
 [Flask 引入swagger](https://blog.csdn.net/u013302168/article/details/128337182)
 
 # 常见问题
