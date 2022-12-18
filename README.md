@@ -282,7 +282,11 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 
 <img width="1439" alt="image" src="https://user-images.githubusercontent.com/19643260/208307968-03625cea-976d-47c7-a100-b5d7403d14ac.png">
 
+[flask flasgger 官方文档](https://github.com/flasgger/flasgger)
+
 [Flask 引入swagger](https://blog.csdn.net/u013302168/article/details/128337182)
+
+
 
 # 常见问题
 
@@ -317,6 +321,8 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 [flask jwt](https://pythonhosted.org/Flask-JWT/)
 
 [python orm SQLAlchemy](https://docs.sqlalchemy.org/en/14/orm/quickstart.html)
+
+[flask flasgger](https://github.com/flasgger/flasgger)
 
 [flask swagger flask-restplus](https://flask-restplus.readthedocs.io/en/stable/swagger.html)
 

@@ -103,6 +103,7 @@ def verify_jwt(token, secret=None):
     if not secret:
         secret = app.config['JWT_SECRET']
     try:
+        # 校验token有效性（是否过期、非法）
         payload = jwt.decode(token, secret, algorithms=['HS256'])
     except jwt.PyJWTError as e:
         print("jwt.PyJWTError：",e)

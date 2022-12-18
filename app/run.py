@@ -142,6 +142,7 @@ def before_request():
             # "校验token"
             payload = verify_jwt(token)
             print("payload:",payload)
+            # 判断payload是否为空
             if payload!=None:
                 # "判断token的校验结果"
                 g.user_id = None

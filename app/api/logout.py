@@ -21,4 +21,5 @@ logout=Blueprint('logout',__name__)
 @logout.route('/', methods=['GET', 'POST'])
 def logout_api():
     # 清除服务端 token TODO 下次的访问接口返回需要登录token 校验失败
+    
     return {"msg": "success", "status": 200, "data": "退出成功"}
