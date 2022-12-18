@@ -285,10 +285,11 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 # 常见问题
 
 * 1.jwt 报错“'str' object has no attribute 'decode'”
-原因：
+![image](https://user-images.githubusercontent.com/19643260/208307781-4959a8a6-c80d-40ac-bb6d-dea61d21ea40.png)
 
 解决办法：
 修改成 return token
+![image](https://user-images.githubusercontent.com/19643260/208307764-45aed83c-e2c3-417f-81c2-30d7fde09c3b.png)
 
 * 2.
 原因：
