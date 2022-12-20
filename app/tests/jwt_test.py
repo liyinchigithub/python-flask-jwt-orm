@@ -1,6 +1,7 @@
 import jwt
 import datetime
 
+# https://pyjwt.readthedocs.io/en/latest/usage.html
 dic = {
     'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),  # 过期时间
     'iat': datetime.datetime.utcnow(),  #   开始时间
