@@ -1,7 +1,8 @@
 import jwt
 from flask import current_app
+import config
 
-
+# jwt 官方文档 https://pyjwt.readthedocs.io/en/latest/usage.html
 class jwt_token():
     # 构造函数（类实例化对象时传入参数） 类(形参)
     def __init__(self):
@@ -19,7 +20,7 @@ class jwt_token():
         _payload.update(payload)
 
         if not secret:
-            secret = current_app.config['JWT_SECRET']
+            secret = config.JWT_SECRET_KEY
         # bytes.decode('utf-8', 'ignore')
         token = jwt.encode(_payload, secret, algorithm='HS256')
         return token
@@ -32,11 +33,16 @@ class jwt_token():
         :return: dict: payload
         """
         if not secret:
-            secret = current_app.config['JWT_SECRET']
+            secret = secret = config.JWT_SECRET_KEY
 
         try:
-            payload = jwt.decode(token, secret, algorithm=['HS256'])
-        except jwt.PyJWTError:
+            print("verify_jwt token:",token)
+            print("verify_jwt secret:",secret) # liyinchi1234567890
+            payload = jwt.decode(token, secret, algorithms= ['HS256'] )
+            print("verify_jwt payload:",payload) # {'exp': 1671632633, 'some': {'jwt': 'jwt'}}
+            
+        except jwt.PyJWTError as e:
+            print("verify_jwt PyJWTError",str(e))
             payload = None
 
         return payload

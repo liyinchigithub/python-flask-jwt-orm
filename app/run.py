@@ -18,15 +18,17 @@ from flask_restplus import Api, Resource, fields, reqparse
 import os
 import uuid  # 生成随机字符串
 import json
+import config
 from api.login import * # 定义路由-登录 [蓝图]模块化
 from api.upload import * # 定义路由-上传文件
 from api.logout import * # 定义路由-退出登录
 from api.register import * # 定义路由-注册
 from api.downloadFile import * # 定义路由-注册
+from api.jwt_token import *  # 引入封装的jwt_token
 
-from common.token import *
+# from common.token import * # token生成和校验
 # 实例化Flask对象 app
-app = Flask(__name__, template_folder='./myProject/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
+app = Flask(__name__, template_folder='./templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/测试.jpg
 #  [swagger]
 swagger = Swagger(app)
 
@@ -44,7 +46,7 @@ app.register_blueprint(downloadFile,url_prefix='/downloadFile')
 
 # [文件上传]存放位置
 print("上传文件存放路径为",os.path.dirname(os.path.abspath(__file__)))
-app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/”
+app.config['UPLOAD_FOLDER'] = './upload/' # 注意 ：upload 前面不能加“/”
 # [文件上传文件大小限制
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
 
@@ -96,7 +98,7 @@ def user_any(name):
     return {"msg": "success", "status": 200, "data": name}
 
 # [动态路由]参数为接受用作目录分隔符的斜杠
-@app.route('/myProject/templates/<path:filename>', methods=['GET', 'POST'])
+@app.route('/templates/<path:filename>', methods=['GET', 'POST'])
 def user_path(filename):
     return {"msg": "success", "status": 200, "data": filename}
 
@@ -108,14 +110,14 @@ def user_regex(name):
 
 
 # [获取url ? 后面的&参数]    request.args.to_dict()
-# @app.route('/find', methods=['GET', 'POST'])
-# @swag_from('swagger_yaml/index.yaml')
-# def find():
-#     get_data = request.args.to_dict()# 获取传入的params参数
-#     username = get_data.get('username')
-#     password = get_data.get('password')
-#     # 返回
-#     return {"msg": "success", "code": 200, "data": {"username":username,"password":password}}
+@app.route('/find', methods=['GET', 'POST'])
+@swag_from('swagger_yaml/index.yaml')
+def find():
+    get_data = request.args.to_dict()# 获取传入的params参数
+    username = get_data.get('username')
+    password = get_data.get('password')
+    # 返回
+    return {"msg": "success", "code": 200, "data": {"username":username,"password":password}}
 
 # 每个请求前执行
 @app.before_request
@@ -138,19 +140,21 @@ def before_request():
         if auth and auth.startswith('Bearer '):
             # "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
             token = auth[7:]
-            print("token:",token)
+            print("before_request token:",token)
             # "校验token"
-            payload = verify_jwt(token)
-            print("payload:",payload)
+            payload=jwt_token().verify_jwt(token,secret=config.JWT_SECRET_KEY)
+            # payload = verify_jwt(token)
+            print("before_request payload:",payload)
             # 判断payload是否为空
             if payload!=None:
                 # "判断token的校验结果"
-                g.user_id = None
-                g.refresh = None
-                if payload:
-                    # "获取载荷中的信息赋值给g对象"
-                    g.user_id = payload.get('user_id')
-                    g.refresh = payload.get('refresh')
+                # g.user_id = None
+                # g.refresh = None
+                # if payload:
+                #     # "获取载荷中的信息，赋值给g对象"
+                #     g.user_id = payload.get('user_id')
+                #     g.refresh = payload.get('refresh')
+                pass
             else:
                 # 校验失败  例如：Signature has expired 签名过期
                 return jsonify({"msg": "登录超时，请重新登录", "code": 403}) 

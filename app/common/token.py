@@ -18,12 +18,13 @@ import os,datetime
 import uuid  # 生成随机字符串
 import json
 import jwt
-app = Flask(__name__, template_folder='./myProject/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
+import config
+app = Flask(__name__, template_folder='./python-flask-jwt-orm/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
 
 # [jwt配置]
-app.config["JWT_SECRET"] = "JWT_SECRET_KEY"
-app.config["JWT_EXPIRY_HOURS"] = 3600 * 1 # 1小时
-app.config["JWT_REFRESH_DAYS"] = 1
+app.config["JWT_SECRET"] = config.JWT_SECRET_KEY
+app.config["JWT_EXPIRY_HOURS"] = config.JWT_EXPIRY_HOURS
+app.config["JWT_REFRESH_DAYS"] = config.JWT_REFRESH_DAYS
 
 '''
     [生成token]

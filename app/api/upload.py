@@ -33,7 +33,10 @@ def random_filename(f):
        print(e)
 
 # [文件上传接口]
-@upload.route('/', methods=['GET', 'POST'])
+
+
+@upload.route('/', methods=['POST'])
+@swag_from('swagger_yaml/upload.yaml',methods=['POST'])
 def upload_api():
     try:
         # 判断是否是POST请求
@@ -56,12 +59,12 @@ def upload_api():
         print(e)
         return {'code': 413, 'msg': 'fail',"data":e}
 
-# [文件上传]渲染页面
-@upload.route('/render_template', methods=['GET', 'POST'])
-def show_images():
-    return render_template('uploaded.html')
+# # [文件上传]渲染页面
+# @upload.route('/render_template', methods=['GET', 'POST'])
+# def show_images():
+#     return render_template('uploaded.html')
 
-# [上传文件]文件名通过url参数传递 /a/b/1.txt
-@upload.route('/<path:filename>')
-def get_file(filename):
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
+# # [上传文件]文件名通过url参数传递 /a/b/1.txt
+# @upload.route('/<path:filename>')
+# def get_file(filename):
+#     return send_from_directory(app.config['UPLOAD_PATH'], filename)

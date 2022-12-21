@@ -14,9 +14,11 @@ parameters:
         username:
           type: string
           description: 登录账号
+          default: liyinchi1
         password:
           type: string
           description: 登录账号
+          default: 123456
 
 responses:
    200:

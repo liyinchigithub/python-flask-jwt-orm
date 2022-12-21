@@ -20,9 +20,8 @@ import jwt
 from api.jwt_token import *  # 引入封装的jwt_token
 from flask import current_app as app  # 让蓝图可以使用app对象
 from config import *  # JWT参数配置文件
-from flasgger import Swagger # flask swagger
-from flasgger.utils import swag_from # flask swagger
-
+from flasgger import Swagger  # flask swagger
+from flasgger.utils import swag_from  # flask swagger
 # 创建蓝图对象
 login = Blueprint('login', __name__)
 
@@ -51,19 +50,25 @@ def login_api():
             # 生成时间信息
             current_time = datetime.datetime.utcnow()
             # 指定有效期  业务token -- 2小时,我们这里测试所以设置的秒数
-            expire_time = current_time + datetime.timedelta(seconds=3600*48)
+
+            expire_time = datetime.datetime.utcnow() + datetime.timedelta(seconds=config.JWT_EXPIRY_HOURS)  # days=1、seconds=3600
+            print("expire_time:",expire_time)
             #
-            _payload = {"some": {"jwt": "jwt"}, "exp": current_time}
+            print("config.JWT_EXPIRY_HOURS:", config.JWT_EXPIRY_HOURS)
+            #
+            _payload = {"data": {"user_id": "6666"}, "exp": expire_time,'iat': datetime.datetime.utcnow()}  # iat 开始时间  # exp 过期时间
+          
             # 查询数据库,检查账号密码是否正确
             token = jwt_token().generate_jwt(payload=_payload,
-                                            expiry=expire_time, secret=JWT_SECRET_KEY)
+                                             expiry=expire_time, secret=config.JWT_SECRET_KEY)
+            print("login token:", token)
             # response body
             return {"msg": "success", "status": 200, "token": token}  # 返回json数据
         else:
             return {"msg": "fail", "status": 201, "data": "账号或密码错误"}  # 返回json数据
     except Exception as e:
         # 捕获异常，判断异常是否查询不到账号爆抛出的异常
-        if str(e)=="'NoneType' object is not subscriptable":
+        if str(e) == "'NoneType' object is not subscriptable":
             return {"msg": "fail", "status": 201, "data": "账号或密码错误"}  # 返回json数据
         else:
             return {"msg": "error", "status": 500, "data":  str(e)}

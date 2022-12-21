@@ -17,12 +17,14 @@
 * |---api         # flask api
 * |---common      # 公共模块
 * |---db          # 数据库模块
-* |---static      # 静态文件
+* |---static      # 静态文件（图片）
 * |---templates   # 模板文件
 * |---tests       # 测试文件
 * |---upload      # 上传文件存放位置
 * |---config.py   # 配置文件
 * |---run.py      # 启动文件
+* |---postman     # postman脚本
+* |---sql         # sql数据库脚本
 
 
 # 安装依赖
@@ -198,6 +200,13 @@ get_data=request.form['username']# request form-data
     request_data = request.json
     print("request.json",request.json)
     return {"msg": "success", "status": 200, "data": request_data}
+```
+### 7.访问静态文件
+
+```python
+app = Flask(__name__, template_folder='./templates/',static_folder="./static/") 
+
+# 访问静态文件夹下的文件 http://127.0.0.1:5876/测试.jpg
 ```
 
 

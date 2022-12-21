@@ -1,0 +1,18 @@
+In this example the specification is taken from external YAML file
+---
+tags:
+  -  upload
+consumes:
+  - multipart/form-data  
+parameters:
+    - name: file
+      required: false
+      in: formData
+      type: file
+responses:
+   200:
+      description: 成功
+      example: {"msg": "success", "code": 200, "data":  "成功"}
+   400:
+      description: 失败
+      example:  {"msg": "error", "code": 500, "data": "失败"}

@@ -3,9 +3,13 @@
 from datetime import timedelta
 
 # jwt scret key
-JWT_SECRET_KEY = "liyinchi1234567890" # 
+JWT_SECRET_KEY = "liyinchi1234567890"
 # jwt 过期时间
-JWT_EXPIRATION_DELTA = timedelta(seconds=3600*48) # 
+JWT_EXPIRY_HOURS = 3600 *1
+JWT_REFRESH_DAYS = 1
+
+JWT_EXPIRATION_DELTA = timedelta(seconds=3600*48)
+
 # jwt 校验的声明
 JWT_VERIFY_CLAIMS = ['signature', 'exp', 'iat']
 # jwt 必须的声明
@@ -22,13 +26,13 @@ JWT_AUTH_HEADER_PREFIX = 'JWT'
 JWT_NOT_BEFORE_DELTA = timedelta(seconds=0)
 
 # swagger
-SWAGGER_TITLE='测试swagger'
-SWAGGER_DESC=''
-SWAGGER_HOST='127.0.0.1'
+SWAGGER_TITLE = '测试swagger'
+SWAGGER_DESC = ''
+SWAGGER_HOST = '127.0.0.1'
 
 # 数据库配置
 DB_USERNAME = 'root'
 DB_PASSWORD = 'lyc123456'
 DB_HOST = '127.0.0.1'
 DB_PORT = '3306'
-DB_NAME='flask_demo'
+DB_NAME = 'flask_demo'
