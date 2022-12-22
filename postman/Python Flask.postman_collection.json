@@ -1,0 +1,865 @@
+{
+	"info": {
+		"_postman_id": "bfcf7ad5-0f1f-4d60-8e4f-4c0dc714ba3a",
+		"name": "Python Flask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "553958"
+	},
+	"item": [
+		{
+			"name": "动态路由",
+			"item": [
+				{
+					"name": "动态路由-字符串参数",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"张三\",\n    \"password\":\"12456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/user/liyinchi",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"user",
+								"liyinchi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "动态路由-数值",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"张三\",\n    \"password\":\"12456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/user_int/100",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"user_int",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "动态路由-路径",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"张三\",\n    \"password\":\"12456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/myProject/templates/a/b/c",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"myProject",
+								"templates",
+								"a",
+								"b",
+								"c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "动态路由-正则表达式",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"张三\",\n    \"password\":\"12456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/user_regex/liyinchi",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"user_regex",
+								"liyinchi"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Python JWT（JsonWebToken）",
+			"item": [
+				{
+					"name": " 登录",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "asdasd",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"liyinchi1\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "注册",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var json = JSON.parse(responseBody);  //获取响应body",
+									"// var token=json.data.token; // 响应内容",
+									"// try {",
+									"//     pm.environment.set(\"token\", token);//设置为环境变量",
+									"//     console.log(\"token\", token);",
+									"",
+									"//     tests[`${JSON.stringify(json)}`] = true;",
+									"// } catch (err) {",
+									"//     console.error(err);",
+									"//     console.log(json.msg);",
+									"//     tests[`创建失败，原因：${json.msg}`] = false;",
+									"// } "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"username\": \"liyinchi\",\n        \"password\": 123456,\n        \"age\": 33,\n        \"address\": \"quanzhou\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n    \"username\":\"jackLi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);  //获取响应body",
+									"var token=json.data.token; // 响应内容",
+									"try {",
+									"    pm.environment.set(\"token\", token);//设置为环境变量",
+									"    console.log(\"token\", token);",
+									"",
+									"    tests[`${JSON.stringify(json)}`] = true;",
+									"} catch (err) {",
+									"    console.error(err);",
+									"    console.log(json.msg);",
+									"    tests[`创建失败，原因：${json.msg}`] = false;",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var json = JSON.parse(responseBody);  //获取响应body",
+									"// var token=json.data.token; // 响应内容",
+									"// try {",
+									"//     pm.environment.set(\"token\", token);//设置为环境变量",
+									"//     console.log(\"token\", token);",
+									"",
+									"//     tests[`${JSON.stringify(json)}`] = true;",
+									"// } catch (err) {",
+									"//     console.error(err);",
+									"//     console.log(json.msg);",
+									"//     tests[`创建失败，原因：${json.msg}`] = false;",
+									"// } "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/find?username=liyinchi1&password=123456",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"find"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "liyinchi1"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刷新token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5876/refreshToken",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var json = JSON.parse(responseBody);  //获取响应body",
+									"// var token=json.data.token; // 响应内容",
+									"// try {",
+									"//     pm.environment.set(\"token\", token);//设置为环境变量",
+									"//     console.log(\"token\", token);",
+									"",
+									"//     tests[`${JSON.stringify(json)}`] = true;",
+									"// } catch (err) {",
+									"//     console.error(err);",
+									"//     console.log(json.msg);",
+									"//     tests[`创建失败，原因：${json.msg}`] = false;",
+									"// } "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page_num\":1,\n    \"page_size\":5\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/register/list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"register",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "文件上传",
+			"item": [
+				{
+					"name": "文件上传",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/liyinchi/Downloads/1586929948102.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/upload/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"upload",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "访问静态文件夹下的文件",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5876/测试.jpg",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"测试.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "文件上传渲染模板",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/upload/render_template/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								"upload",
+								"render_template",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "大小限制",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var json = JSON.parse(responseBody);  //获取响应body",
+									"// var token=json.data.token; // 响应内容",
+									"// try {",
+									"//     pm.environment.set(\"token\", token);//设置为环境变量",
+									"//     console.log(\"token\", token);",
+									"",
+									"//     tests[`${JSON.stringify(json)}`] = true;",
+									"// } catch (err) {",
+									"//     console.error(err);",
+									"//     console.log(json.msg);",
+									"//     tests[`创建失败，原因：${json.msg}`] = false;",
+									"// } "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "liyinchi",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "啊啊啊",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "文件类型",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var json = JSON.parse(responseBody);  //获取响应body",
+									"// var token=json.data.token; // 响应内容",
+									"// try {",
+									"//     pm.environment.set(\"token\", token);//设置为环境变量",
+									"//     console.log(\"token\", token);",
+									"",
+									"//     tests[`${JSON.stringify(json)}`] = true;",
+									"// } catch (err) {",
+									"//     console.error(err);",
+									"//     console.log(json.msg);",
+									"//     tests[`创建失败，原因：${json.msg}`] = false;",
+									"// } "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "liyinchi",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "啊啊啊",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5876/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5876",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

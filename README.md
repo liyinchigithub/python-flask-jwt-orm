@@ -262,24 +262,441 @@ payload = jwt.decode(token, secret, algorithms=['HS256'])
 
 ## Flask ORM SQLAlchemy
 
+
+```python
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime, Date, Time, DECIMAL, Text, create_engine, and_, or_, func
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+import uuid,sys
+
+# 创建对象的基类:
+Base = declarative_base()
+
+# 创建表对象:
+
+
+class User(Base):
+    # 表的名字:
+    __tablename__ = 'user'
+    # 表的结构:
+    id = Column(Integer, autoincrement=True,
+                primary_key=True, nullable=False)  # 自增、主键、不为空
+    username = Column(String(100), nullable=False)  # 字符串、不为空
+    password = Column(String(500), nullable=False)  # 字符串、不为空
+    role = Column(String(500), nullable=False)  # 字符串、不为空
+    type = Column(Integer, nullable=False)  # 整型、不为空
+    mark = Column(String(500), nullable=False)  # 字符串、不为空
+    uuid = Column(String(500), nullable=False)  # 字符串、不为空
+    is_delete = Column(Boolean, nullable=False)  # 布尔值、不为空
+    create_date = Column(DateTime, nullable=False)  # 日期时间、不为空，  数据库自动生成时间戳
+    update_date = Column(DateTime, nullable=False)  # 日期时间、不为空，  数据库自动生成时间戳
+    # datetime.datetime.now() 获取当前时间
+
+    # sqlalchemy转json，方式一
+    def to_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'password': self.password,
+            'role': self.role,
+            'type': self.type,
+            'mark': self.mark,
+            'uuid': self.uuid,
+            'is_delete': self.is_delete,
+            'create_date': self.create_date,
+            'update_date': self.update_date
+        }
+    # sqlalchemy转dict，方式二
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'password': self.password,
+            'role': self.role,
+            'type': self.type,
+            'mark': self.mark,
+            'uuid': self.uuid,
+            'is_delete': self.is_delete,
+            'create_date': self.create_date,
+            'update_date': self.update_date
+        }
+
+
+'''
+    CREATE TABLE IF NOT EXISTS `user`(
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username` VARCHAR(100) NOT NULL COMMENT '账号',
+    `password` VARCHAR(500) NOT NULL COMMENT '密码',
+    `role` VARCHAR(500) NOT NULL COMMENT '角色',
+    `type` INT(255) NOT NULL COMMENT '类型ID',
+    `mark` VARCHAR(500) NOT NULL COMMENT '备注',
+    `uuid` VARCHAR(500) NOT NULL COMMENT '唯一uuid',
+    `is_delete` TINYINT NOT NULL COMMENT '是否使用',
+    `create_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '日期',
+    `update_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新日期',
+    PRIMARY KEY (`id`)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+'''
+```
+
 ### 增加一行记录
 ```python
+# 初始化数据库连接: TODO 参数化
+engine = create_engine(
+    f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
+# 创建DBSession类型:
+DBSession = sessionmaker(bind=engine)
+# 创建session对象:
+session = DBSession()
+'''
+    # [用户表插入数据-创建用户]
+    @param: username string
+    @pparam: password string
+    @pparam: role string
+    @pparam: type int
+    @pparam: mark string
+    @return: user object
+'''
+
+def insert_user(username, password, role, type, mark):
+    try:
+        # 创建新User对象:
+        user = User(username=username, password=password, role=role, type=type, mark=mark,
+                    uuid=str(uuid.uuid4()), is_delete=False)  # 插入数据表成功后，返回的是一个对象，具有id属性
+        # 添加到session
+        session.add(user)
+        print("user:", user)
+        # 提交即保存到数据库
+        session.commit()
+        # 判断是否插入成功
+        if user.id:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+# 初始化数据库连接: TODO 参数化
+engine = create_engine(
+    f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
+# 创建DBSession类型:
+DBSession = sessionmaker(bind=engine)
+# 创建session对象:
+session = DBSession()
+
+'''
+    [用户表插入数据-创建用户]
+    @param: username string
+    @pparam: password string
+    @pparam: role string
+    @pparam: type int
+    @pparam: mark string
+    @return: user object
+'''
+
+
+def insert_user(username, password, role, type, mark):
+    try:
+        # 创建新User对象:
+        user = User(username=username, password=password, role=role, type=type, mark=mark,
+                    uuid=str(uuid.uuid4()), is_delete=False)  # 插入数据表成功后，返回的是一个对象，具有id属性
+        # 添加到session
+        session.add(user)
+        print("user:", user)
+        # 提交即保存到数据库
+        session.commit()
+        # 判断是否插入成功
+        if user.id:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
 
 ```
 
 ### 修改一行记录
 ```python
-
+'''
+    [修改]
+    param: id int
+    param: data dict
+'''
+def update_user(id, data):
+    try:
+        # 根据 id 字段修改数据
+        res = session.query(User).filter(User.id == id).update(data)
+        print("res:", res)  # 1
+        print("修改一条数据======================")
+        session.commit()
+        return res
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
 ```
 
 ### 查询一行记录
 ```python
 
+'''
+    [查询(多条件or)]
+'''
+def select_user_multiple_condition_and(searchText):
+    try:
+        # res = session.query(UserMonitor).filter(
+        #     UserMonitor.username.like('%liyinchi%'), UserMonitor.id > 5).all()  # 方法一
+        # res = session.query(UserMonitor).filter(
+        #     and_(UserMonitor.username.like('%liyinchi%'), UserMonitor.id > 5)).all()  # 方法二
+        # res = session.query(JiraJql).filter(
+        #         JiraJql.title.like(f'%{title}%')).all()
+        res = session.query(User).filter(or_(User.username.like(f'%{searchText}%'), User.role.like(f'%{searchText}%'), User.mark.like(f'%{searchText}%'))).all()  # 方法二
+        print("res:",res)
+        # for r in res7:
+        #     print("r.title", r.title)
+        #     print("r.id:", r.id)
+        print("多条件  且 and======================")
+        if isinstance(res, list):
+            return [{column.name:getattr(value,column.name) for column in value.__table__.columns} for value in res]
+        else:
+            if hasattr(res, '__table__'):
+                return {column.name:getattr(res,column.name) for column in res.__table__.columns}
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+'''
+     [ 查询(检查账号密码是否正确)]
+'''
+def select_check_username_password(username, password):
+    try:
+        # 获取多条，只返回第一条
+        res = session.query(User).filter(User.username == username).filter(
+            User.password == password).first()
+        print(type(res))
+        if isinstance(res, list):
+            return [{column.name: getattr(value, column.name) for column in value.__table__.columns} for value in res]
+        else:
+            if hasattr(res, '__table__'):
+                return {column.name: getattr(res, column.name) for column in res.__table__.columns}
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+'''
+    [精确查询(用户姓名)仅返回匹配多条中的第一条]
+    param: condition 列表 例如：['liyinchi1','liyinchi2']
+    return json
+'''
+def select_user_first_one(username):
+    try:
+        # 获取多条，只返回第一条
+        res = session.query(User).filter(User.username == username).first()
+        print(type(res))
+        if isinstance(res, list):
+            return [{column.name: getattr(value, column.name) for column in value.__table__.columns} for value in res]
+        else:
+            if hasattr(res, '__table__'):
+                return {column.name: getattr(res, column.name) for column in res.__table__.columns}
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+'''
+    [精确查询(用户ID)仅返回匹配多条中的第一条]
+    param: condition 列表 例如：['liyinchi1','liyinchi2']
+    return json
+'''
+def select_user_id_first_one(id):
+    try:
+        # 获取多条，只返回第一条
+        res = session.query(User).filter(User.id == id).first()
+        print(type(res))
+        if isinstance(res, list):
+            return [{column.name: getattr(value, column.name) for column in value.__table__.columns} for value in res]
+        else:
+            if hasattr(res, '__table__'):
+                return {column.name: getattr(res, column.name) for column in res.__table__.columns}
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+
+'''
+    [模糊查询（用户姓名）]
+    param: username string
+'''
+def select_user_fuzzy(username):
+    try:
+        res = session.query(User).filter(
+            User.username.like(f'%{username}%')).all()
+        for r in res:
+            print("r.username", r.username)
+            print("r.id:", r.id)
+        res = session.query(func.count(User.id), func.count(
+            User.username)).group_by(User.id).all()
+        print("func.count(User.id):", res)
+        print("模糊查询======================")
+        return res
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+
+'''
+    [查询(全量数据)]
+'''
+def select_user_all():
+    try:
+        res = session.query(User).all()
+        if isinstance(res, list):
+            return [{column.name:getattr(value,column.name) for column in value.__table__.columns} for value in res]
+        else:
+            if hasattr(res, '__table__'):
+                return {column.name:getattr(res,column.name) for column in res.__table__.columns}
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+'''
+    [分页查询]
+    @param: page_size int  每页显示的记录数量
+    @param: page_num int 当前页码
+'''
+def select_user_page(page_num=1, page_size=10):
+    try:
+        # 偏移量
+        offset_data = page_size * (page_num-1)
+        # 查询数据
+        res = session.query(User).offset(offset_data).limit(page_size)
+        # to_dict方法是在 创建数据模型 时就定义好了的
+        res = [item.to_dict() for item in res]
+        print("select_user_page res:", type(res))  # list
+        return res
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+
+
 ```
 
 ### 删除一行记录
 ```python
+def delete_user(id):
+    try:
+        # 根据 id 字段删除数据
+        res = session.query(User).filter(
+            User.id == id).delete()  # 根据id字段，删除指定数据
+        print("res11:", res)  # 1表示删除成功，0表示删除失败
+        print("删除一条数据======================")
+        session.commit()
+        return res
+    except Exception as e:
+        print(e)
+        session.rollback()# 回滚
+    finally:
+        session.close()# 关闭session
+```
 
+### 其他
+
+```Python
+# [is null]
+res5 = session.query(User).filter(User.username.is_(None)).all()
+for r in res5:
+    print("r.username", r.username)
+    print("r.id:", r.id)
+print("为空======================")
+
+# [is not null]
+res6 = session.query(User).filter(User.username.isnot(None)).all()
+for r in res6:
+    print("r.username", r.username)
+    print("r.id:", r.id)
+print("不为空======================")
+
+# [and]
+res7 = session.query(User).filter(
+    User.username.like('%liyinchi%'), User.id > 5).all()  # 方法一
+res7 = session.query(User).filter(
+    and_(User.username.like('%liyinchi%'), User.id > 5)).all()  # 方法二
+res7 = session.query(User).filter(User.username.like(
+    '%liyinchi%')).filter(User.id > 5).all()  # 方法三
+
+for r in res7:
+    print("r.username", r.username)
+    print("r.id:", r.id)
+print("多条件  且 and======================")
+
+# [or]
+res8 = session.query(User).filter(
+    or_(User.username.like('%liyinchi%'), User.id > 5)).all()  # 方法二
+for r in res8:
+    print("r.username", r.username)
+    print("r.id:", r.id)
+print("或 or======================")
+
+# [限制返回条数]
+res = session.query(User).limit(2).all()
+# [限制，类似mysql的limit]
+res = session.query(User).filter(
+    User.id > 1, User.username.like('%liyinchi%'))[1:3]
+print("res", res)
+print("限制返回条数======================")
+
+# [指定范围之间 between]
+res = session.query(User).filter(User.id.between(1, 3))
+print("res", res)
+print("指定范围之间 between======================")
+
+# [通配符]
+res = session.query(User).filter(User.username.like('liyinchi_'))
+res = session.query(User).filter(User.username.like('%liyinchi'))
+print("res", res)
+print("通配符======================")
+
+# [排序] 默认升序，desc降序
+res = session.query(User).order_by(User.id.desc()).all()
+print("res", res)  # 返回的是一个列表
+print("排序======================")
+
+
+# [分组]
+res = session.query(func.count(User.id), func.max(
+    User.id), func.min(User.id)).group_by(User.type).all()
+print("res", res)  # [(1, 1, 1), (1, 1, 1)]
+print("分组======================")
+
+[连表]
+res = session.query(User).join(UserType, isouter=True) # 内连接取外表的交集   isouter=True表示可以不存在关联的数据
+print("res",res)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+print("连表======================")
+res = session.query(User).outerjoin(UserType)# 外连接取外表的并集
+print("res",res)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+print("连表======================")
 ```
 
 
