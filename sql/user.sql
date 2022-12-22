@@ -1,0 +1,9 @@
+INSERT INTO `user` VALUES (67, 'liyinchi1', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:51', '2022-12-17 15:01:57');
+INSERT INTO `user` VALUES (68, 'liyinchi2', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:52', '2022-12-17 15:01:59');
+INSERT INTO `user` VALUES (69, 'liyinchi3', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:53', '2022-12-17 15:02:01');
+INSERT INTO `user` VALUES (70, 'liyinchi4', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:54', '2022-12-17 15:02:03');
+INSERT INTO `user` VALUES (71, 'liyinchi5', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:55', '2022-12-17 15:02:05');
+INSERT INTO `user` VALUES (72, 'liyinchi6', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:55', '2022-12-17 15:02:07');
+INSERT INTO `user` VALUES (73, 'liyinchi7', '菜鸟123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:56', '2022-12-17 15:02:10');
+INSERT INTO `user` VALUES (74, 'liyinchi11', '123456', 'admin', 'asd123b1jh3', 0, '2022-04-25 08:17:56', '2022-12-18 14:54:46');
+INSERT INTO `user` VALUES (76, 'liyinchi', '123456', 'string', '4878128d-4639-40e5-a02c-8a1635d22745', 0, '2022-12-18 15:43:27', '2022-12-18 15:43:27');
